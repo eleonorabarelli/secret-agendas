@@ -28,11 +28,22 @@
 
     <section id="reveal-section" class="panel hidden">
       <h2>Rivelazione giocatore <span id="current-player-number">1</span>/6</h2>
-      <p id="player-name"></p>
-      <p id="player-role"></p>
-      <div id="agendas-list"></div>
-      <button id="next-button" class="primary">Passa al prossimo</button>
-      <button id="restart-button" class="secondary hidden">Ricomincia</button>
+      <div id="lock-screen" class="lock-screen">
+        <p>Passa il telefono a <strong id="next-player-name">Giocatore 1</strong>.</p>
+        <p>Quando sei pronto, tocca per vedere il ruolo e le missioni.</p>
+        <button id="unlock-button" class="primary">Tocca per rivelare</button>
+      </div>
+      <div id="reveal-content" class="hidden">
+        <p id="player-name"></p>
+        <div class="card">
+          <p id="player-role"></p>
+          <ul id="agendas-list"></ul>
+        </div>
+        <div class="button-row">
+          <button id="next-button" class="primary">Passa al prossimo</button>
+          <button id="restart-button" class="secondary hidden">Ricomincia</button>
+        </div>
+      </div>
     </section>
 
     <section class="panel note">
