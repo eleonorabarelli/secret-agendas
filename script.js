@@ -64,19 +64,31 @@ const playerRoleLabel = document.getElementById('player-role');
 const agendasList = document.getElementById('agendas-list');
 const nextButton = document.getElementById('next-button');
 const restartButton = document.getElementById('restart-button');
+const unlockButton = document.getElementById('unlock-button');
+const lockScreen = document.getElementById('lock-screen');
+const revealContent = document.getElementById('reveal-content');
+const nextPlayerName = document.getElementById('next-player-name');
 
 let players = [];
 let roles = [];
 let assignments = [];
 let currentIndex = 0;
+let isUnlocked = false;
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  players = Array.from(form.elements.player).map(input => input.value.trim() || 'Giocatore');
+  players = Array.from(form.querySelectorAll('input[name="player"]')).map((input, index) => input.value.trim() || `Giocatore ${index + 1}`);
   if (players.length !== 6) {
     return;
   }
   startSession();
+});
+
+unlockButton.addEventListener('click', () => {
+  isUnlocked = true;
+  lockScreen.classList.add('hidden');
+  revealContent.classList.remove('hidden');
+  nextButton.classList.remove('hidden');
 });
 
 nextButton.addEventListener('click', () => {
@@ -84,6 +96,7 @@ nextButton.addEventListener('click', () => {
   if (currentIndex >= players.length) {
     showFinalScreen();
   } else {
+    isUnlocked = false;
     renderPlayerReveal();
   }
 });
@@ -99,12 +112,13 @@ function startSession() {
   setupSection.classList.add('hidden');
   revealSection.classList.remove('hidden');
   restartButton.classList.add('hidden');
-  nextButton.classList.remove('hidden');
+  nextButton.classList.add('hidden');
   renderPlayerReveal();
 }
 
 function renderPlayerReveal() {
   currentPlayerNumber.textContent = currentIndex + 1;
+  nextPlayerName.textContent = players[currentIndex];
   playerNameLabel.textContent = `Nome: ${players[currentIndex]}`;
   playerRoleLabel.textContent = `Ruolo: ${roles[currentIndex]}`;
   agendasList.innerHTML = '';
@@ -118,13 +132,18 @@ function renderPlayerReveal() {
   } else {
     nextButton.textContent = 'Passa al prossimo';
   }
+  lockScreen.classList.remove('hidden');
+  revealContent.classList.add('hidden');
+  nextButton.classList.add('hidden');
 }
 
 function showFinalScreen() {
-  currentPlayerNumber.textContent = '6';
+  currentPlayerNumber.textContent = players.length;
   playerNameLabel.textContent = 'Tutti i ruoli sono stati assegnati.';
   playerRoleLabel.textContent = 'Buon divertimento al party!';
   agendasList.innerHTML = '<li>Hai finito. Ora divertitevi e cercate di completare le missioni.</li>';
+  lockScreen.classList.add('hidden');
+  revealContent.classList.remove('hidden');
   nextButton.classList.add('hidden');
   restartButton.classList.remove('hidden');
 }
