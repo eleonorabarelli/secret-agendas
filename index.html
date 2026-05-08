@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Party Agenda Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Party Agenda Game</h1>
+    <p>6 giocatori, un unico telefono. Ogni ruolo riceve missioni segrete: il <strong>Lupo</strong> ne riceve 3, gli altri 1.</p>
+
+    <section id="setup-section" class="panel">
+      <h2>Imposta la sessione</h2>
+      <form id="player-form">
+        <div class="grid">
+          <label>Giocatore 1<input type="text" name="player" value="Giocatore 1" /></label>
+          <label>Giocatore 2<input type="text" name="player" value="Giocatore 2" /></label>
+          <label>Giocatore 3<input type="text" name="player" value="Giocatore 3" /></label>
+          <label>Giocatore 4<input type="text" name="player" value="Giocatore 4" /></label>
+          <label>Giocatore 5<input type="text" name="player" value="Giocatore 5" /></label>
+          <label>Giocatore 6<input type="text" name="player" value="Giocatore 6" /></label>
+        </div>
+        <button type="submit" class="primary">Genera ruoli e missioni</button>
+      </form>
+    </section>
+
+    <section id="reveal-section" class="panel hidden">
+      <h2>Rivelazione giocatore <span id="current-player-number">1</span>/6</h2>
+      <p id="player-name"></p>
+      <p id="player-role"></p>
+      <div id="agendas-list"></div>
+      <button id="next-button" class="primary">Passa al prossimo</button>
+      <button id="restart-button" class="secondary hidden">Ricomincia</button>
+    </section>
+
+    <section class="panel note">
+      <h2>Come giocare</h2>
+      <ul>
+        <li>Passa il telefono al giocatore corrente quando è pronto a vedere il ruolo.</li>
+        <li>Il giocatore legge il ruolo e le missioni in segreto.</li>
+        <li>Quando è pronto, passa il telefono al successivo.</li>
+        <li>Buon divertimento al party!</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
